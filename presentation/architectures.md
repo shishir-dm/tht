@@ -65,7 +65,7 @@ Note: At this point in time cockrachDB [does not support](https://github.com/coc
 - To make Postgres HA, we deploy a writer and 2 reader replicas across the 3 AZs
 - PG Pool load balances the client connections between replicas
 - Each replica has a PVC
-- HAa is achieved via fail over and promotion of reader to writer
+- High Availability is achieved via fail over and promotion of reader to writer
 
 ### Scenario 3: AWS EKS with Aurora Postgres
 
@@ -93,3 +93,4 @@ Why Aurora Postgres?
 - In simpler/ testing cases the analyst can access the DB via an EC2 or kubernetes pod bastion
 - In more advanced cases we could look at connecting the on-prem/ office VPN with the EKS VPC by using AWS Site to Site VPN, this way the analyst can access the Internal DB Reader endpoint via the on-prem VPN and thier IAM DB Credentials.
 
+### To continue the presentation, head to the next section: [Deployments](deployments.md)

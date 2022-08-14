@@ -4,7 +4,7 @@ In this document we will describe in a high-level some example architectures for
 
 This repository is meant to serve as a bucket for multiple example repositories such as
 - [repo_microservices](repo_microservices): Example repository that holds the source code of our services (Go) and the deployment infrastructure code of our services (Helm, Docker, docker-compose)
-- [repo_argo-config](repo_argo-config): Example repository that hold the ArgoCD configuration that tells ArgoCDthe following
+- [repo_argo-config](repo_argo-config): Example repository that holds the ArgoCD configuration that describes:
   - What helm chart to deploy (version, name etc)
   - Where to deploy this helm chart (which kubernetes clsuter)
   - How to deploy this helm chart (what values/config to use)
