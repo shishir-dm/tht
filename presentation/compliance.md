@@ -17,4 +17,4 @@ For more details see [AWS Shared Responsibility Model](https://docs.aws.amazon.c
 
 By default AWS EKS, VPCs, Load Balancers are already created to be HIPAA compliant for AWS so our job is mostly to ensure that we as developers strictly adhere to the [best practices](https://docs.aws.amazon.com/whitepapers/latest/architecting-hipaa-security-and-compliance-on-amazon-eks/securing-an-amazon-eks-deployment.html) defined by AWS for EKS workloads.
 
-Each of individual section of these best practices such as IAM, Pod Security, Network Segmentation, Host hardenning, Logging, Auditting etc can be discussed and met.
+Each of individual section of these best practices such as IAM, Pod Security, Network Segmentation, Host hardenning, Logging, Auditting etc can be discussed and met. Individual solutions have been currently excluded from the scope of this exercise.

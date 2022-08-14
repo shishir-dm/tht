@@ -1,6 +1,6 @@
 ## Deployment Pipelines
 
-In order to reliable and automatically keeping deploying new versions of our services we would build the following pipelines
+In order to reliably and automatically keeping deploying new versions of our services we would build the following pipelines
 
 ![CI/CD Pipelines](diagrams/pipeline.png "CI/CD Pipelines")
 
@@ -9,7 +9,7 @@ The elaboration of CI pipeline is not the goal of this exercise, hence we shortl
 
 - The CI pipeline begins with the dev creating a new branch and pushing some code changes onto it.
 - These changes are then tested in various ways (Unit tests, integration tests, e2e test etc)
-- Once these tests are successful, the CI pipeline ensd with merging the branch into master and the creation of a deployable articfact such as a docker image. This [Dockerfile](repo_microservices/service-a/Dockerfile) describes how such an image can be created.
+- Once these tests are successful, the CI pipeline ends with merging the branch into master and the creation of a deployable articfact such as a docker image. This [Dockerfile](repo_microservices/service-a/Dockerfile) describes how such an image can be created.
 - This process can be seen in Green in the above diagram
 
 ### CD Pipeline or how do I deploy my services?
@@ -36,12 +36,12 @@ Argo Rollouts (optionally) integrates with ingress controllers and service meshe
 ### Deep Dive into CD Pipeline
 - CD pipeline picks up where CI ends i.e after the creation of the docker image.
 - Once we have a new docker image and want to make a release we update the image tag values in the target service's helm chart.
-- This change kicks off some tests (helm CI) of the new helm charts, and on success we release the new helm chart to the dev helm repo.
-- The dev ArgoCD watches for new versions in the dev helm repo and automatically updates the service on the dev cluster.
-- Once some QA is done on the dev cluster or some time has passed we can promote the dev chart to prod and now the prog argocd will upgrade the service on the prod cluster.
-- The upgrades themselves are controlled via argo rollouts via blue/green or canary.
-- In blue/green a preview of the new version is brought up and tested before bringing down the old version
-- In canary a preview of the new version is brought up and a certain amount of traffic is diverted to it incrementally before bringing down the old version
+- This change kicks off some tests (helm CI) of the new helm charts, and on success we tag and release the new helm chart to the dev helm repo.
+- The dev-ArgoCD watches for new versions in the dev helm repo and automatically updates the service on the dev cluster.
+- Once some QA is done on the dev cluster or some time has passed we can promote the dev chart to prod (tag and release) and now the prod-argocd will upgrade the service on the prod cluster.
+- The upgrades themselves are controlled via argo rollouts via blue/green or canary methods.
+- In blue/green a preview of the new version is brought up and tested before bringing down the old version.
+- In canary a preview of the new version is brought up and a certain amount of traffic is diverted to it incrementally before bringing down the old version.
 
 ### How do deployments on ArgoCD work?
 

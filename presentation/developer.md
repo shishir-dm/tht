@@ -11,6 +11,68 @@ In this example we assume that service-a and service-b are microservices and aft
 - Since we have chosen a mono-repo approach we have stored the docker-compose.yaml file in the root of the repo.
 - This allows us to easily spin up the entire application i.e service-a, service-b and cockroach-db locally via a single command and optionally add profiles with which we can optionally spin-up only a set of required application and not all 3 (e.g only service-b and the db)
 
+Example docker-compose file
+```yaml
+version: "3.8"
+services:
+  service-a:
+    build: "service-a"
+    ports:
+      - "8080"
+    restart: unless-stopped
+    environment:
+      DB_URL: cockroachdb:26257
+      DB_USER: root
+      DB_PASSWORD_FILE: /run/secrets/db-password
+    networks:
+      - backend
+
+  service-b:
+    build: "service-b"
+    ports:
+      - "8081"
+    restart: unless-stopped
+    environment:
+      DB_URL: cockroachdb:26257
+      DB_USER: root
+      DB_PASSWORD_FILE: /run/secrets/db-password
+    networks:
+      - backend
+
+  cockroachdb:
+    image: cockroachdb/cockroach:v19.2.2
+    ports:
+      - "26257:26257"
+    command: start-single-node --insecure
+    secrets:
+      - db-password
+    environment:
+      ROOT_PASSWORD_FILE: /run/secrets/db-password
+    volumes:
+      - "db-data:/cockroach/cockroach-data"
+    networks:
+      - backend
+
+  nginx:
+    build: "./hacks/nginx"
+    ports:
+      - "80:80"
+    depends_on:
+      - "cockroachdb"
+      - "service-a"
+      - "service-b"
+    networks:
+      - backend
+
+networks:
+  backend: {}
+volumes:
+  db-data: {}
+secrets:
+  db-password:
+    file: hacks/db/password.txt
+```
+
 To start the dev setup ensure you have the following installed
 - Docker Desktop > v4.6
 - docker cli > v20.10.13
