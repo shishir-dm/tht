@@ -20,7 +20,7 @@ This repo has the following structure
 
 This structure is meant for argocd to deploy different helm charts on different cluster environments. For example everything under `aws/dev/apps` is meant to deployed on the AWS Dev EKS cluster.
 
-To configure this ArgoCd also uses an Application and it would look like
+To configure this, ArgoCD also uses an Application itself (known as the [App of Apps pattern](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern)) and it would look like
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
