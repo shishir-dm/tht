@@ -54,6 +54,6 @@ Below we explore an example application from our setup. See the repository [repo
 
 ![Example ArgoCD Application](diagrams/argo_app.png "Example ArgoCD Application")
 
-Once we have these Application yamls all we need to do is apply them to the cluster or configure a git repo in ArgoCD so that we can then use GitOps to automcatically manage all kubernetes deployments.
+Once we have these Application yamls all we need to do is apply them to the cluster and ArgoCD will then go and install the required helm chart. Or even better is to configure a git repo in ArgoCD and add the yamls there so that we can then use GitOps to automcatically manage all kubernetes deployments. This is what we have assumed in [repo_argo-config](../repo_argo-config/README.md)
 
 ### To continue the presentation, head to the next section: [Developer Setup](developer.md)
