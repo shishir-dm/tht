@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  service-a:
+    build: "."
+    ports:
+      - "8080"
+    restart: unless-stopped
+    environment:
+      DB_URL: cockroachdb:26257
+      DB_USER: root
+      DB_PASSWORD_FILE: /run/secrets/db-password
+    networks:
+      - backend
+
+  cockroachdb:
+    image: cockroachdb/cockroach:v19.2.2
+    ports:
+      - "26257:26257"
+    command: start-single-node --insecure
+    secrets:
+      - db-password
+    environment:
+      ROOT_PASSWORD_FILE: /run/secrets/db-password
+    volumes:
+      - "db-data:/cockroach/cockroach-data"
+    networks:
+      - backend
+
+  nginx:
+    build: "./hacks/nginx"
+    ports:
+      - "80:80"
+    depends_on:
+      - "cockroachdb"
+      - "service-a"
+    networks:
+      - backend
+
+networks:
+  backend: {}
+volumes:
+  db-data: {}
+secrets:
+  db-password:
+    file: hacks/db/password.txt
