@@ -1,8 +1,8 @@
 ## Developer Setup
 
-In order to enable developers to test their changes locally we propose using docker-compose.
+In order to enable developers to test their changes locally we propose using [docker-compose](https://docs.docker.com/compose/).
 
-Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration. To learn more about all the features of Compose, see the list of features.
+Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
 
 ## How to?
 
