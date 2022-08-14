@@ -6,10 +6,12 @@ Compose is a tool for defining and running multi-container Docker applications. 
 
 ## How to?
 
-In this example we assume that service-a and service-b are microservices and after understanding the tradeoff's we have chosen a [mono-repo](repo_microservices) approach, optionally we have also provided the skeleton for a multi-repo approach of [service-a](repo_service-a) and [service-b](repo_service-b) individually.
+In this example we assume that service-a and service-b are microservices and after understanding the tradeoff's we have chosen a [mono-repo](../repo_microservices/README.md) approach, optionally we have also provided the skeleton for a multi-repo approach of [service-a](../repo_service-a/README.md) and [service-b](../repo_service-b/README.md) individually.
 
 - Since we have chosen a mono-repo approach we have stored the docker-compose.yaml file in the root of the repo.
 - This allows us to easily spin up the entire application i.e service-a, service-b and cockroach-db locally via a single command and optionally add profiles with which we can optionally spin-up only a set of required application and not all 3 (e.g only service-b and the db)
+
+The mono-repo with the below docker-compose file can be found [here](../repo_microservices/README.md)
 
 Example docker-compose file
 ```yaml
