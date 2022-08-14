@@ -35,13 +35,13 @@ Argo Rollouts (optionally) integrates with ingress controllers and service meshe
 
 ### Deep Dive into CD Pipeline
 - CD pipeline picks up where CI ends i.e after the creation of the docker image.
-- Once we have a new docker image and want to make a release we update the image tag values in the target service's helm chart.
-- This change kicks off some tests (helm CI) of the new helm charts, and on success we tag and release the new helm chart to the dev helm repo.
+- Once we have a new docker image, and want to make a release, we update the image tag value in the target service's helm chart.
+- This change kicks off some tests (helm CI) of the new helm chart version (with the new image tag), and when these tests succeed, we tag and release the new helm chart to the dev helm repo.
 - The dev-ArgoCD watches for new versions in the dev helm repo and automatically updates the service on the dev cluster.
-- Once some QA is done on the dev cluster or some time has passed we can promote the dev chart to prod (tag and release) and now the prod-argocd will upgrade the service on the prod cluster.
+- Once some QA is done on the latest upgraded version on the dev cluster, we can promote (tag and release) the dev chart to prod. Now the prod-ArgoCD will upgrade the service on the prod cluster.
 - The upgrades themselves are controlled via argo rollouts via blue/green or canary methods.
-- In blue/green a preview of the new version is brought up and tested before bringing down the old version.
-- In canary a preview of the new version is brought up and a certain amount of traffic is diverted to it incrementally before bringing down the old version.
+- In [blue/green](https://argoproj.github.io/argo-rollouts/features/bluegreen/) a preview of the new version is brought up and tested before bringing down the old version.
+- In [canary](https://argoproj.github.io/argo-rollouts/features/canary/) a preview of the new version is brought up and a certain amount of traffic is diverted to it incrementally before bringing down the old version.
 
 ### How do deployments on ArgoCD work?
 
@@ -54,6 +54,6 @@ Below we explore an example application from our setup. See the repository [repo
 
 ![Example ArgoCD Application](diagrams/argo_app.png "Example ArgoCD Application")
 
-Once we have these Application yamls all we need to do is apply them to the cluster and ArgoCD will then go and install the required helm chart. Or even better is to configure a git repo in ArgoCD and add the yamls there so that we can then use GitOps to automcatically manage all kubernetes deployments. This is what we have assumed in [repo_argo-config](../repo_argo-config/README.md)
+Once we have these Application yamls all we need to do is apply them to the cluster and ArgoCD will then go and install the required helm chart. Or even better is to configure a git repo in ArgoCD and add the yamls there so that we can then use GitOps to automcatically manage all kubernetes deployments from git via PRs. This is what we have assumed in [repo_argo-config](../repo_argo-config/README.md).
 
 ### To continue the presentation, head to the next section: [Developer Setup](developer.md)
