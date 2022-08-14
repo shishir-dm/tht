@@ -1,6 +1,6 @@
 ## High Level SaaS architecture
 
-In this document we will describe in a high-level some example architectures for a SaaS solution built on Kubernetes with two individual services, service-a and service-nb and a distributed database.
+In this document we will describe in a high-level some example architectures for a SaaS solution built on Kubernetes with two individual services, 'service-a' and 'service-b' and a distributed database.
 
 This repository is meant to serve as a bucket for multiple example repositories such as
 - [repo_microservices](repo_microservices): Example repository that holds the source code of our services (Go) and the deployment infrastructure code of our services (Helm, Docker, docker-compose)
